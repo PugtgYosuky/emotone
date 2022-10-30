@@ -23,7 +23,7 @@ def get_data_for_training(midi_csv, midi_dir):
 # Parse arguments
 parser = argparse.ArgumentParser(description='midi_split.py')
 parser.add_argument('--csv', type=str, required=True, help="Midi dataset.")
-parser.add_argument('--midi', type=str, required=True, help="Path to midi files.")
+parser.add_argument('--midi', type=str, default='../midi', help="Path to midi files.")
 parser.add_argument('--out', type=str, default=".", help="Output dir.")
 opt = parser.parse_args()
 
