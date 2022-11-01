@@ -71,6 +71,7 @@ def build_generative_model(vocab_size, embedding_size, lstm_units, lstm_layers, 
         )
 
     model.add(tf.keras.layers.Dense(vocab_size))
+    return model
 
 
 def generative_loss(labels, logits):
@@ -85,6 +86,11 @@ def train_generative_model(model, train_dataset, test_dataset, epochs, learning_
     # checkpoint
     checkpoint_prefix = os.path.join(TRAIN_DIR, "generative_checkpoint_{epoch}")
     checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_prefix, save_weights_only=True)
+
+def __split_input_target(chuck):
+    input_text = chuck[:-1]
+    target_text = chuck[1:]
+    return input_text, target_text
 
 def main():
     train_text, train_vocab = midi_encoder.load(TRAIN_DATASET)
