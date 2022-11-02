@@ -45,7 +45,7 @@ def sample_next(predictions, k):
 
     return predicted_id
 
-    
+
 def process_init_text(model, init_text, vocabulary, layer_index, override):
 
     model.reset_states()
@@ -127,3 +127,5 @@ def main():
     # write midi
     midi_encoder.write(midi_text, os.path.join(GENERATED_DIR, 'generated.mid'))
 
+if __name__ == '__main__':
+    main()
