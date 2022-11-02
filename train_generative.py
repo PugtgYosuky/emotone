@@ -14,10 +14,10 @@ embedding_size = 256
 units = 512
 layers = 2
 batch = 64
-epochs = 10
-sequence_len = 100
-learning_rate = 0.001
-dropout = 0.0
+epochs = 15
+sequence_len = 256
+learning_rate = 0.0001
+dropout = 0.05
 
 def build_vocabulary(train_vocab, test_vocab):
     # Merge train and test vocabulary
@@ -84,8 +84,10 @@ def train_generative_model(model, train_dataset, test_dataset, epochs, learning_
     model.compile(optimizer=optimizer, loss=generative_loss)
 
     # checkpoint
-    checkpoint_prefix = os.path.join(TRAIN_DIR, "generative_checkpoint_{epoch}")
+    checkpoint_prefix = os.path.join(SAVE_CHECKPOINTS, "generative_checkpoint_{epoch}")
     checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_prefix, save_weights_only=True)
+
+    return model.fit(train_dataset, epochs=epochs, validation_data=test_dataset,callbacks=[checkpoint_callback])
 
 def __split_input_target(chuck):
     input_text = chuck[:-1]
@@ -111,3 +113,8 @@ def main():
 
     # train model
     history = train_generative_model(generative_model, train_dataset, test_dataset, epochs, learning_rate)
+    # TODO: ver se está guardado
+
+
+if __name__ == "__main__":
+    main()
