@@ -1,11 +1,11 @@
 import os
-import json
+import json 
 import numpy as np
 import tensorflow as tf
 import midi_encoder
 
 from train_generative import build_generative_model
-from train_classifier import preprocess_sentence
+# TODO: import classifier
 
 GENERATED_DIR = os.path.join('generated')
 SAVE_CHECKPOINTS = os.path.join('trained')
@@ -15,10 +15,9 @@ embedding_size = 256
 units = 512
 layers = 2
 sequence_init = '\n'
-sequence_len = 256
+sequence_len= 256
 lstm_unit_as_encoder = -2
 override_path = ''
-
 
 def override_neurons(model, layer_index, override):
     h, c = model.get_layer(index=layer_index).states
@@ -30,8 +29,8 @@ def override_neurons(model, layer_index, override):
 
     model.get_layer(index=layer_index).states = (h, tf.Variable(c))
 
-
 def sample_next(predictions, k):
+
     # sample using a categorical distribution over the top k midi chars
     # creates the following based on the previous predictions
     top_k = tf.math.top_k(predictions, k)
@@ -48,6 +47,7 @@ def sample_next(predictions, k):
 
 
 def process_init_text(model, init_text, vocabulary, layer_index, override):
+
     model.reset_states()
 
     for char in init_text.split(''):
@@ -60,13 +60,12 @@ def process_init_text(model, init_text, vocabulary, layer_index, override):
 
             predictions = model(input_eval)
         except:
-            if char != '':
+            if char!='':
                 print('Cannot process char ', char)
     return predictions
 
 
-def generate_midi(model, vocabulary, index_vocabulary, init_text="", sequence_len=256, k=3, layer_index=-2,
-                  override={}):
+def generate_midi(model, vocabulary, index_vocabulary, init_text="", sequence_len=256, k=3, layer_index=-2, override={}):
     # add padding
     init_text = preprocess_sentence(init_text)
 
@@ -78,6 +77,7 @@ def generate_midi(model, vocabulary, index_vocabulary, init_text="", sequence_le
 
     model.reset_states()
     for i in range(sequence_len):
+
         # remove batch dimension
         predictions = tf.squeeze(predictions, 0).numpy()
 
@@ -98,20 +98,21 @@ def generate_midi(model, vocabulary, index_vocabulary, init_text="", sequence_le
 
 
 def main():
+
     # load vocabulary
     with open(VOCABULARY_DIR, 'r') as file:
         vocabulary = json.load(file)
 
     # load override dictionary
     override = {}
-    try:
+    try :
         with open(override_path, 'r') as over_file:
             override = json.load(over_file)
     except:
         print('Override file does not exist')
 
     # index vocabulary
-    index_vocabulary = {index: char for char, index in vocabulary.items()}
+    index_vocabulary = { index:char for char,index in vocabulary.items() }
 
     vocabulary_len = len(vocabulary)
 
@@ -121,12 +122,10 @@ def main():
     model.build(tf.TensorShape([1, None]))
 
     # generate midi as text
-    midi_text = generate_midi(model, vocabulary, index_vocabulary, sequence_init, sequence_len,
-                              layer_index=lstm_unit_as_encoder, override=override)
+    midi_text = generate_midi(model, vocabulary, index_vocabulary, sequence_init, sequence_len, layer_index=lstm_unit_as_encoder, override=override)
 
     # write midi
     midi_encoder.write(midi_text, os.path.join(GENERATED_DIR, 'generated.mid'))
-
 
 if __name__ == '__main__':
     main()
