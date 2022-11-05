@@ -1,12 +1,12 @@
 """From Lucas Ferreira"""
 
 import os
-import numpy   as np
-import math    as ma
+import numpy as np
+import math as ma
 import music21 as m21
 
 THREE_DOTTED_BREVE = 15
-THREE_DOTTED_32ND  = 0.21875
+THREE_DOTTED_32ND = 0.21875
 
 MIN_VELOCITY = 0
 MAX_VELOCITY = 128
@@ -15,6 +15,7 @@ MIN_TEMPO = 24
 MAX_TEMPO = 160
 
 MAX_PITCH = 128
+
 
 def load(datapath, sample_freq=4, piano_range=(33, 93), transpose_range=10, stretching_range=10):
     text = ""
@@ -48,6 +49,7 @@ def load(datapath, sample_freq=4, piano_range=(33, 93), transpose_range=10, stre
 
     return text, vocab
 
+
 def parse_midi(file_path, sample_freq, piano_range, transpose_range, stretching_range):
     print("Parsing midi file:", file_path)
 
@@ -58,7 +60,7 @@ def parse_midi(file_path, sample_freq, piano_range, transpose_range, stretching_
     # If txt version of the midi already exists, load data from it
     midi_txt_name = os.path.join(midi_dir, midi_name + ".txt")
 
-    if(os.path.isfile(midi_txt_name)):
+    if (os.path.isfile(midi_txt_name)):
         midi_fp = open(midi_txt_name, "r")
         encoded_midi = midi_fp.read()
     else:
@@ -78,6 +80,7 @@ def parse_midi(file_path, sample_freq, piano_range, transpose_range, stretching_
             midi_fp.close()
     return encoded_midi
 
+
 def midi2encoding(midi, sample_freq, piano_range, transpose_range, stretching_range):
     try:
         midi_stream = m21.midi.translate.midiFileToStream(midi)
@@ -92,13 +95,14 @@ def midi2encoding(midi, sample_freq, piano_range, transpose_range, stretching_ra
 
     return " ".join(encoded_midi)
 
+
 def piano_roll2encoding(piano_roll):
     # Transform piano roll into a list of notes in string format
     final_encoding = {}
 
     perform_i = 0
     for version in piano_roll:
-        lastTempo    = -1
+        lastTempo = -1
         lastVelocity = -1
         lastDuration = -1.0
 
@@ -106,15 +110,15 @@ def piano_roll2encoding(piano_roll):
 
         for i in range(len(version)):
             # Time events are stored at the last row
-            tempo = version[i,-1][0]
+            tempo = version[i, -1][0]
             if tempo != 0 and tempo != lastTempo:
                 version_encoding.append("t_" + str(int(tempo)))
                 lastTempo = tempo
 
             # Process current time step of the piano_roll
             for j in range(len(version[i]) - 1):
-                duration = version[i,j][0]
-                velocity = int(version[i,j][1])
+                duration = version[i, j][0]
+                velocity = int(version[i, j][1])
 
                 if velocity != 0 and velocity != lastVelocity:
                     version_encoding.append("v_" + str(velocity))
@@ -147,12 +151,14 @@ def piano_roll2encoding(piano_roll):
 
     return final_encoding.keys()
 
+
 def write(encoded_midi, path):
     # Base class checks if output path exists
     midi = encoding2midi(encoded_midi)
     midi.open(path, "wb")
     midi.write()
     midi.close()
+
 
 def encoding2midi(note_encoding, ts_duration=0.25):
     notes = []
@@ -197,23 +203,25 @@ def encoding2midi(note_encoding, ts_duration=0.25):
     notes.insert(0, piano)
 
     piano_stream = m21.stream.Stream(notes)
-    main_stream  = m21.stream.Stream([piano_stream])
+    main_stream = m21.stream.Stream([piano_stream])
 
     return m21.midi.translate.streamToMidiFile(main_stream)
+
 
 def midi_parse_notes(midi_stream, sample_freq):
     note_filter = m21.stream.filters.ClassFilter('Note')
 
     note_events = []
     for note in midi_stream.recurse().addFilter(note_filter):
-        pitch    = note.pitch.midi
+        pitch = note.pitch.midi
         duration = note.duration.quarterLength
         velocity = note.volume.velocity
-        offset   = ma.floor(note.offset * sample_freq)
+        offset = ma.floor(note.offset * sample_freq)
 
         note_events.append((pitch, duration, velocity, offset))
 
     return note_events
+
 
 def midi_parse_chords(midi_stream, sample_freq):
     chord_filter = m21.stream.filters.ClassFilter('Chord')
@@ -222,14 +230,15 @@ def midi_parse_chords(midi_stream, sample_freq):
     for chord in midi_stream.recurse().addFilter(chord_filter):
         pitches_in_chord = chord.pitches
         for pitch in pitches_in_chord:
-            pitch    = pitch.midi
+            pitch = pitch.midi
             duration = chord.duration.quarterLength
             velocity = chord.volume.velocity
-            offset   = ma.floor(chord.offset * sample_freq)
+            offset = ma.floor(chord.offset * sample_freq)
 
             note_events.append((pitch, duration, velocity, offset))
 
     return note_events
+
 
 def midi_parse_metronome(midi_stream, sample_freq):
     metronome_filter = m21.stream.filters.ClassFilter('MetronomeMark')
@@ -242,6 +251,7 @@ def midi_parse_metronome(midi_stream, sample_freq):
 
     return time_events
 
+
 def midi2notes(midi_stream, sample_freq, transpose_range):
     notes = []
     notes += midi_parse_notes(midi_stream, sample_freq)
@@ -249,6 +259,7 @@ def midi2notes(midi_stream, sample_freq, transpose_range):
 
     # Transpose the notes to all the keys in transpose_range
     return transpose_notes(notes, transpose_range)
+
 
 def midi2piano_roll(midi_stream, sample_freq, piano_range, transpose_range, stretching_range):
     # Calculate the amount of time steps in the piano roll
@@ -261,6 +272,7 @@ def midi2piano_roll(midi_stream, sample_freq, piano_range, transpose_range, stre
     time_streches = strech_time(time_events, stretching_range)
 
     return notes2piano_roll(transpositions, time_streches, time_steps, piano_range)
+
 
 def notes2piano_roll(transpositions, time_streches, time_steps, piano_range):
     performances = []
@@ -291,12 +303,13 @@ def notes2piano_roll(transpositions, time_streches, time_steps, piano_range):
 
     return performances
 
+
 def transpose_notes(notes, transpose_range):
     transpositions = []
 
     # Modulate the piano_roll for other keys
-    first_key = -ma.floor(transpose_range/2)
-    last_key  =  ma.ceil(transpose_range/2)
+    first_key = -ma.floor(transpose_range / 2)
+    last_key = ma.ceil(transpose_range / 2)
 
     for key in range(first_key, last_key):
         notes_in_key = []
@@ -308,12 +321,13 @@ def transpose_notes(notes, transpose_range):
 
     return transpositions
 
+
 def strech_time(time_events, stretching_range):
     streches = []
 
     # Modulate the piano_roll for other keys
-    slower_time = -ma.floor(stretching_range/2)
-    faster_time =  ma.ceil(stretching_range/2)
+    slower_time = -ma.floor(stretching_range / 2)
+    faster_time = ma.ceil(stretching_range / 2)
 
     # Modulate the piano_roll for other keys
     for t_strech in range(slower_time, faster_time):
@@ -326,14 +340,16 @@ def strech_time(time_events, stretching_range):
 
     return streches
 
+
 def discretize_value(val, bins, range):
     min_val, max_val = range
 
     val = int(max(min_val, val))
     val = int(min(val, max_val))
 
-    bin_size = (max_val/bins)
-    return ma.floor(val/bin_size) * bin_size
+    bin_size = (max_val / bins)
+    return ma.floor(val / bin_size) * bin_size
+
 
 def clamp_pitch(pitch, max, min):
     while pitch < min:
@@ -341,6 +357,7 @@ def clamp_pitch(pitch, max, min):
     while pitch >= max:
         pitch -= 12
     return pitch
+
 
 def clamp_duration(duration, max=THREE_DOTTED_BREVE, min=THREE_DOTTED_32ND):
     # Max duration is 3-dotted breve
@@ -357,4 +374,3 @@ def clamp_duration(duration, max=THREE_DOTTED_BREVE, min=THREE_DOTTED_32ND):
         duration = m21.duration.typeToDuration[duration_clossest_type]
 
     return duration
-
