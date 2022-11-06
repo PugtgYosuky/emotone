@@ -5,6 +5,7 @@ import numpy as np
 import tensorflow as tf
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
 
 import midi_encoder
 from train_generative import build_generative_model
@@ -34,7 +35,7 @@ def encode_sentence(model, text, vocabulary, layer_index):
             predictions = model(input_val)
         except KeyError:
             if char != '':
-                print('Cannot process char', char)
+                print(f'Cannot process char |{char}|')
     h, c = model.get_layer(index=layer_index).states
 
     c = tf.squeeze(c, 0)
@@ -43,18 +44,18 @@ def encode_sentence(model, text, vocabulary, layer_index):
     return tf.math.tanh(c).numpy()
 
 
-def build_dataset(path, generative_model, vocabulary, layer_index):
+def build_dataset(midis_path, data_path,  generative_model, vocabulary, layer_index):
     x = []
     y = []
 
-    data = pd.read_csv(path)
+    data = pd.read_csv(data_path)
 
     for row_index in range(data.shape[0]):
-        label = data.iloc[[row_index], ['emotion']]
-        filename = data.iloc[[row_index], ['midi']]
+        label = data.loc[row_index]['emotion']
+        filename = data.loc[row_index]['midi']
         music_name = filename.split('.')[0]
-        phrase_path = os.path.join(path, filename)
-        encoded_path = os.path.join(path, music_name + '.npt')
+        phrase_path = os.path.join(midis_path, filename)
+        encoded_path = os.path.join(midis_path, music_name + '.npt')
 
         # load midi as text
         if os.path.isfile(encoded_path):
@@ -134,8 +135,9 @@ def main():
     units = 512
     layers = 4
     batch_size = 1
-    train_path = os.path.join('vgmidi', 'labelled', 'train', 'train_dataset.csv')
-    test_path = os.path.join('vgmidi', 'labelled', 'test', 'test_dataset.csv')
+    midis_path = os.path.join('vgmidi', 'labelled', 'midi')
+    data_path = os.path.join('vgmidi', 'labelled', 'dataset', 'sentiment_labelled.csv')
+    test_percentage = 0.2
     layer_index = 4
 
     # load vocabulary
@@ -147,12 +149,15 @@ def main():
 
     # rebuild generative model from checkpoint
     generative_model = build_generative_model(vocabulary_size, embedding_size, units, layers, batch_size)
-    generative_model.load_weights(tf.train.latest_checkpoint(model_checkpoints))
+    generative_model.load_weights(tf.train.latest_checkpoint(SAVE_CHECKPOINTS))
     generative_model.build(tf.TensorShape([1, None]))
 
     # build datasets
-    train_dataset = build_dataset(train_path, generative_model, vocabulary, layer_index)
-    test_dataset = build_dataset(test_path, generative_model, vocabulary, layer_index)
+    x, y = build_dataset(midis_path, data_path, generative_model, vocabulary, layer_index)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=test_percentage)
+
+    train_dataset = (x_train, y_train)
+    test_dataset = (x_test, y_test)
 
     # train classifier
     sentiment_neurons, score = train_classifier_model(train_dataset, test_dataset)
