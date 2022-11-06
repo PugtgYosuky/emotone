@@ -153,6 +153,7 @@ def piano_roll2encoding(piano_roll):
 
 
 def write(encoded_midi, path):
+    print('Write midi')
     # Base class checks if output path exists
     midi = encoding2midi(encoded_midi)
     midi.open(path, "wb")

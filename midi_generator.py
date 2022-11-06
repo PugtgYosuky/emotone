@@ -9,6 +9,7 @@ from train_classifier import preprocess_sentence
 
 GENERATED_DIR = os.path.join('generated')
 SAVE_CHECKPOINTS = os.path.join('trained')
+print(os.listdir(SAVE_CHECKPOINTS))
 VOCABULARY_DIR = os.path.join(SAVE_CHECKPOINTS, "vocabulary_dict.json")
 
 embedding_size = 256
@@ -50,7 +51,7 @@ def sample_next(predictions, k):
 def process_init_text(model, init_text, vocabulary, layer_index, override):
     model.reset_states()
 
-    for char in init_text.split(''):
+    for char in init_text.split(' '):
         # run a forward pass
         try:
             input_eval = tf.expand_dims([vocabulary[char]], 0)
@@ -68,6 +69,7 @@ def process_init_text(model, init_text, vocabulary, layer_index, override):
 
 def generate_midi(model, vocabulary, index_vocabulary, init_text="", sequence_length=256, k=3, layer_index=-2,
                   override={}):
+    print('Generate midi')
     # add padding
     init_text = preprocess_sentence(init_text)
 
