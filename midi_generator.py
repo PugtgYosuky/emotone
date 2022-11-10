@@ -73,7 +73,7 @@ def generate_midi(model, vocabulary, index_vocabulary, init_text="", sequence_le
     # add padding
     init_text = preprocess_sentence(init_text)
 
-    # to store the results
+    # to store the plots
     midi_generated = []
 
     # process initial text

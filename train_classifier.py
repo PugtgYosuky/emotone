@@ -49,7 +49,6 @@ def build_dataset(midis_path, data_path,  generative_model, vocabulary, layer_in
     y = []
 
     data = pd.read_csv(data_path)
-
     for row_index in range(data.shape[0]):
         label = data.loc[row_index]['emotion']
         filename = data.loc[row_index]['midi']
@@ -61,6 +60,9 @@ def build_dataset(midis_path, data_path,  generative_model, vocabulary, layer_in
         if os.path.isfile(encoded_path):
             encoding = np.load(encoded_path)
         else:
+            if not os.path.exists(phrase_path):
+                continue
+
             text, _ = midi_encoder.load(phrase_path, transpose_range=1, stretching_range=1)
 
             # encode with lstm
@@ -78,17 +80,17 @@ def get_activated_neurons(sentiment_classifier):
     neurons_not_zero = len(np.argwhere(sentiment_classifier.coef_))
 
     weights = sentiment_classifier.coef_.T
-    weights_penalties = np.squeeze(np.linalg.norm(weights, ord=1, axis=1))
+    weight_penalties = np.squeeze(np.linalg.norm(weights, ord=1, axis=1))
 
     if neurons_not_zero == 1:
-        neurons_indexes = np.array([np.argmax(weights_penalties)])
-    elif neurons_not_zero >= np.log(len(weights_penalties)):
-        neurons_indexes = np.argsort(weights_penalties)[-neurons_not_zero:][::-1]
+        neuron_ixs = np.array([np.argmax(weight_penalties)])
+    elif neurons_not_zero >= np.log(len(weight_penalties)):
+        neuron_ixs = np.argsort(weight_penalties)[-neurons_not_zero:][::-1]
     else:
-        neurons_indexes = np.argpartition(weights_penalties, -neurons_not_zero)[-neurons_not_zero]
-        neurons_indexes = (neurons_indexes[np.argsort(weights_penalties[neurons_indexes])])[::-1]
+        neuron_ixs = np.argpartition(weight_penalties, -neurons_not_zero)[-neurons_not_zero:]
+        neuron_ixs = (neuron_ixs[np.argsort(weight_penalties[neuron_ixs])])[::-1]
 
-    return neurons_indexes
+    return neuron_ixs
 
 
 def train_classifier_model(train_dataset, test_dataset, reg_strength=2 ** np.arange(-8, 1).astype(np.float), seed=42,
@@ -106,7 +108,8 @@ def train_classifier_model(train_dataset, test_dataset, reg_strength=2 ** np.ara
         scores.append(score)
 
     # calculate best model
-    best_reg_strength = reg_strength(np.argmax(scores))
+    best_reg_strength = reg_strength[np.argmax(scores)]
+    best_reg_strength = reg_strength[np.argmax(scores)]
     final_classifier = LogisticRegression(C=best_reg_strength, penalty=penalty, random_state=seed + len(reg_strength),
                                           solver='liblinear')
     final_classifier.fit(train_x, train_y)
@@ -120,7 +123,7 @@ def train_classifier_model(train_dataset, test_dataset, reg_strength=2 ** np.ara
 
     sentiment_neurons = get_activated_neurons(final_classifier)
 
-    # plot results
+    # plot plots
     plot_results.plot_weight_contributions(final_classifier.coef_)
     plot_results.plot_logistcs(train_x, train_y, sentiment_neurons)
 
@@ -162,7 +165,7 @@ def main():
     # train classifier
     sentiment_neurons, score = train_classifier_model(train_dataset, test_dataset)
 
-    # results
+    # plots
     print(f'Total neurons used: {len(sentiment_neurons)}')
     print('Sentiment neurons:')
     print(sentiment_neurons)

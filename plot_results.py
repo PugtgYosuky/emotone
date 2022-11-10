@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 
-PLOTS_DIRECTORY = os.path.join('results')
+PLOTS_DIRECTORY = os.path.join('plots')
 
 
 def plot_logistc_and_save(xs, ys, neuron):

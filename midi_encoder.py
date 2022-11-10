@@ -60,19 +60,21 @@ def parse_midi(file_path, sample_freq, piano_range, transpose_range, stretching_
     # If txt version of the midi already exists, load data from it
     midi_txt_name = os.path.join(midi_dir, midi_name + ".txt")
 
-    if (os.path.isfile(midi_txt_name)):
+    if os.path.isfile(midi_txt_name):
         midi_fp = open(midi_txt_name, "r")
         encoded_midi = midi_fp.read()
     else:
         # Create a music21 stream and open the midi file
+
+        """
         midi = m21.midi.MidiFile()
         midi.open(file_path)
         midi.read()
         midi.close()
+        """
 
         # Translate midi to stream of notes and chords
-        encoded_midi = midi2encoding(midi, sample_freq, piano_range, transpose_range, stretching_range)
-
+        encoded_midi = midi2encoding(file_path, sample_freq, piano_range, transpose_range, stretching_range)
         if len(encoded_midi) > 0:
             midi_fp = open(midi_txt_name, "w+")
             midi_fp.write(encoded_midi)
@@ -82,11 +84,13 @@ def parse_midi(file_path, sample_freq, piano_range, transpose_range, stretching_
 
 
 def midi2encoding(midi, sample_freq, piano_range, transpose_range, stretching_range):
-    try:
-        midi_stream = m21.midi.translate.midiFileToStream(midi)
-    except:
+    # try:
+    # midi_stream = m21.midi.translate.midiFileToStream(midi)
+    """except Exception as e:
+        print(e)
         return []
-
+    """
+    midi_stream = m21.converter.parse(midi)
     # Get piano roll from midi stream
     piano_roll = midi2piano_roll(midi_stream, sample_freq, piano_range, transpose_range, stretching_range)
 
@@ -153,7 +157,6 @@ def piano_roll2encoding(piano_roll):
 
 
 def write(encoded_midi, path):
-    print('Write midi')
     # Base class checks if output path exists
     midi = encoding2midi(encoded_midi)
     midi.open(path, "wb")
