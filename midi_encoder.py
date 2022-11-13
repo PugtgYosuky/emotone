@@ -1,6 +1,5 @@
-"""From Lucas Ferreira"""
-
 import os
+import argparse
 import numpy as np
 import math as ma
 import music21 as m21
@@ -60,21 +59,19 @@ def parse_midi(file_path, sample_freq, piano_range, transpose_range, stretching_
     # If txt version of the midi already exists, load data from it
     midi_txt_name = os.path.join(midi_dir, midi_name + ".txt")
 
-    if os.path.isfile(midi_txt_name):
+    if (os.path.isfile(midi_txt_name)):
         midi_fp = open(midi_txt_name, "r")
         encoded_midi = midi_fp.read()
     else:
         # Create a music21 stream and open the midi file
-
-        """
         midi = m21.midi.MidiFile()
         midi.open(file_path)
         midi.read()
         midi.close()
-        """
 
         # Translate midi to stream of notes and chords
-        encoded_midi = midi2encoding(file_path, sample_freq, piano_range, transpose_range, stretching_range)
+        encoded_midi = midi2encoding(midi, sample_freq, piano_range, transpose_range, stretching_range)
+
         if len(encoded_midi) > 0:
             midi_fp = open(midi_txt_name, "w+")
             midi_fp.write(encoded_midi)
@@ -84,13 +81,11 @@ def parse_midi(file_path, sample_freq, piano_range, transpose_range, stretching_
 
 
 def midi2encoding(midi, sample_freq, piano_range, transpose_range, stretching_range):
-    # try:
-    # midi_stream = m21.midi.translate.midiFileToStream(midi)
-    """except Exception as e:
-        print(e)
+    try:
+        midi_stream = m21.midi.translate.midiFileToStream(midi)
+    except:
         return []
-    """
-    midi_stream = m21.converter.parse(midi)
+
     # Get piano roll from midi stream
     piano_roll = midi2piano_roll(midi_stream, sample_freq, piano_range, transpose_range, stretching_range)
 
@@ -378,3 +373,19 @@ def clamp_duration(duration, max=THREE_DOTTED_BREVE, min=THREE_DOTTED_32ND):
         duration = m21.duration.typeToDuration[duration_clossest_type]
 
     return duration
+
+
+if __name__ == "__main__":
+    # Parse arguments
+    parser = argparse.ArgumentParser(description='midi_encoder.py')
+    parser.add_argument('--path', type=str, required=True, help="Path to midi data.")
+    parser.add_argument('--transp', type=int, default=1, help="Transpose range.")
+    parser.add_argument('--strech', type=int, default=1, help="Time stretching range.")
+    opt = parser.parse_args()
+
+    # Load data and encoded it
+    text, vocab = load(opt.path, transpose_range=opt.transp, stretching_range=opt.strech)
+    print(text)
+
+    # Write all data to midi file
+    write(text, "encoded.mid")
