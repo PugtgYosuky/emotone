@@ -6,6 +6,7 @@ import tensorflow as tf
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
+import time
 
 import midi_encoder
 from train_generative import build_generative_model
@@ -93,7 +94,7 @@ def get_activated_neurons(sentiment_classifier):
     return neuron_ixs
 
 
-def train_classifier_model(train_dataset, test_dataset, reg_strength=2 ** np.arange(-8, 1).astype(np.float), seed=42,
+def train_classifier_model(train_dataset, test_dataset, reg_strength=2 ** np.arange(-8, 1).astype(float), seed=42,
                            penalty='l1'):
     train_x, train_y = train_dataset
     test_x, test_y = test_dataset
@@ -150,6 +151,7 @@ def main():
     # vocabulary size
     vocabulary_size = len(vocabulary)
 
+    start = time.time()
     # rebuild generative model from checkpoint
     generative_model = build_generative_model(vocabulary_size, embedding_size, units, layers, batch_size)
     generative_model.load_weights(tf.train.latest_checkpoint(SAVE_CHECKPOINTS))
@@ -164,12 +166,13 @@ def main():
 
     # train classifier
     sentiment_neurons, score = train_classifier_model(train_dataset, test_dataset)
-
+    end = time.time()
     # plots
     print(f'Total neurons used: {len(sentiment_neurons)}')
     print('Sentiment neurons:')
     print(sentiment_neurons)
     print(f'Model Accuracy: {score}')
+    print('Total time:', (end - start)/60, 'minutes')
 
 
 if __name__ == '__main__':
