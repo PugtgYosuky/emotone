@@ -1,0 +1,27 @@
+python3.7 midi_encoder.py --path vgmidi/unlabelled/train --transp 10 --strech 10
+python3.7 midi_encoder.py --path vgmidi/unlabelled/test --transp 10 --strech 10
+
+
+# train generative LSTM
+
+python train_generative.py --train ./vgmidi/unlabelled/train/ --test ./vgmidi/unlabelled/test/ --embed 256 --units 512 --layers 2 --batch 64 --epochs 10 --lrate 0.01 --seqlen 128 --drop 0.01
+
+python3 midi_generator.py --model trained --ch2ix trained/char2idx.json --embed 256 --units 512 --layers 2
+
+# train classifier
+python3 train_classifier.py --model trained --ch2ix trained/char2idx.json --embed 256 --units 512 --layers 2 --train ./vgmidi/labelled/vgmidi_sent_train.csv --test ./vgmidi/labelled/vgmidi_sent_test.csv --cellix 4
+
+# evolve generative
+
+python evolve_generative.py --ch2ix trained/char2idx.json --embed 256 --units 512 --layers 2 --genmodel trained/ --clsmodel trained/classifier_ckpt.p --cellix 2 --elitism 0.1 --epochs 10 --sent 1
+
+# evolve neurons
+
+python3 midi_generator.py --model trained --ch2ix trained/char2idx.json --embed 256 --units 512 --layers 2 --cellix
+
+# generate positive pieces
+
+python midi_generator.py --model trained/ --ch2ix trained/char2idx.json --embed 256 --units 512 --layers 2 --seqlen 512 --override trained/neurons_positive.json --cellix 2
+
+# generate negative pieces
+python midi_generator.py --model trained/ --ch2ix trained/char2idx.json --embed 256 --units 512 --layers 2 --seqlen 512 --override trained/neurons_negative.json --cellix 2
