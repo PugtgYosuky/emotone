@@ -36,7 +36,8 @@ def encode_sentence(model, text, vocabulary, layer_index):
             predictions = model(input_val)
         except KeyError:
             if char != '':
-                print(f'Cannot process char |{char}|')
+                # print(f'Cannot process char |{char}|')
+                pass
     h, c = model.get_layer(index=layer_index).states
 
     c = tf.squeeze(c, 0)
