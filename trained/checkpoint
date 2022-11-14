@@ -1,0 +1,2 @@
+model_checkpoint_path: "generative_checkpoint_10"
+all_model_checkpoint_paths: "generative_checkpoint_10"
