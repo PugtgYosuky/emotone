@@ -63,13 +63,13 @@ def process_init_text(model, init_text, vocabulary, layer_index, override):
             return predictions
         except KeyError:
             if char != '':
-                print('Cannot process char ', char)
+                # print('Cannot process char ', char)
                 return None
 
 
 def generate_midi(model, vocabulary, index_vocabulary, init_text="", sequence_length=256, k=3, layer_index=-2,
                   override={}):
-    print('Generate midi')
+    # print('Generate midi')
     # add padding
     init_text = preprocess_sentence(init_text)
 
