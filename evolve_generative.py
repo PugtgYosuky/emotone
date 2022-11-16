@@ -160,7 +160,7 @@ if __name__ == '__main__':
     population_size = 10
     mutation = 0.2
 
-    sentiment = 2  # ! CHANGE THE SENTIMENT
+    sentiment = 4  # ! CHANGE THE SENTIMENT
 
     # load vocabulary
     with open(vocabulary_path) as file:
@@ -209,4 +209,4 @@ if __name__ == '__main__':
         json.dump(neurons, file)
 
     end = time.time()
-    print('Total time:', (end - start)/60, 'seconds')
+    print('Total time:', (end - start)/60, 'minutes')

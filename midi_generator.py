@@ -11,14 +11,14 @@ GENERATED_DIR = os.path.join('generated')
 SAVE_CHECKPOINTS = os.path.join('trained')
 print(os.listdir(SAVE_CHECKPOINTS))
 VOCABULARY_DIR = os.path.join(SAVE_CHECKPOINTS, "vocabulary_dict.json")
+override_path = os.path.join(SAVE_CHECKPOINTS, 'neurons_sad.json')
 
 embedding_size = 256
 units = 512
 layers = 2
 sequence_init = '\n'
 sequence_len = 256
-lstm_unit_as_encoder = -2
-override_path = ''
+lstm_unit_as_encoder = 1
 
 
 def override_neurons(model, layer_index, override):
@@ -117,18 +117,24 @@ def main():
     index_vocabulary = {index: char for char, index in vocabulary.items()}
 
     vocabulary_len = len(vocabulary)
+    print('Vocabulary len:', vocabulary_len)
 
     # build model from checkpoints
+    print(1)
     model = build_generative_model(vocabulary_len, embedding_size, units, layers, batch_size=1)
+    print(2)
     model.load_weights(tf.train.latest_checkpoint(SAVE_CHECKPOINTS))
+    print(3)
     model.build(tf.TensorShape([1, None]))
+    print(4)
 
     # generate midi as text
     midi_text = generate_midi(model, vocabulary, index_vocabulary, sequence_init, sequence_len,
                               layer_index=lstm_unit_as_encoder, override=override)
 
     # write midi
-    midi_encoder.write(midi_text, os.path.join(GENERATED_DIR, 'generated.mid'))
+    midi_encoder.write(midi_text, os.path.join(GENERATED_DIR, 'sad.mid'))
+    print("generated midi")
 
 
 if __name__ == '__main__':
