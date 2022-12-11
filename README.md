@@ -7,10 +7,6 @@
 ### Objective
 This project aims to create an artificial intelligence system capable of generating melodies that induce certain emotions in people.
 
-### References
-
-The project was heavily based on the work of Lucas N. Ferreira and Jim Whitehead, their work can be accessed at https://arxiv.org/abs/2103.06125.
-
 ### Important Notes:
 - Due to the large size of the LSTM checkpoints, before running the project (in case you don't want to retrain the LSTM) you need to download the zip files from https://drive.google.com/file/d/1q6z1J7TDpdTiqzRhH4fudDKtcuy_g5wV/view?usp=sharing and add the checkpoints to the project's "trained" folder
 
@@ -25,3 +21,8 @@ The project was heavily based on the work of Lucas N. Ferreira and Jim Whitehead
 - The sections 'Imports', 'Variables', should always be run first. 
 
 - To train the classifier, change the weights of the LSTM (Evolve LSTM) or generate tunes, the "Variable post-training LSTM" must be run before them.
+
+
+### References
+
+The project was heavily based on the work of Lucas N. Ferreira and Jim Whitehead, their work can be accessed at https://arxiv.org/abs/2103.06125.
