@@ -1,0 +1,60 @@
+t_129 v_68 d_quarter_0 n_43 w_6 v_64 d_eighth_0 n_47 w_3 t_128 w_1 n_50 w_1 t_126 w_1 t_124 n_52 w_2 t_123 n_50 w_1 t_121 w_242 
+ t_137 v_68 d_quarter_0 n_43 w_6 v_64 d_eighth_0 n_47 w_3 t_136 w_1 n_50 w_1 t_134 w_1 t_132 n_52 w_2 t_131 n_50 w_1 t_129 w_242 
+ t_145 v_68 d_quarter_0 n_43 w_6 v_64 d_eighth_0 n_47 w_3 t_144 w_1 n_50 w_1 t_142 w_1 t_140 n_52 w_2 t_139 n_50 w_1 t_137 w_242 
+ t_153 v_68 d_quarter_0 n_43 w_6 v_64 d_eighth_0 n_47 w_3 t_152 w_1 n_50 w_1 t_150 w_1 t_148 n_52 w_2 t_147 n_50 w_1 t_145 w_242 
+ t_160 v_68 d_quarter_0 n_43 w_6 v_64 d_eighth_0 n_47 w_4 n_50 w_1 t_158 w_1 t_156 n_52 w_2 t_155 n_50 w_1 t_153 w_242 
+ t_160 v_68 d_quarter_0 n_43 w_6 v_64 d_eighth_0 n_47 w_4 n_50 w_2 n_52 w_2 n_50 w_243 
+ t_129 v_68 d_quarter_0 n_44 w_6 v_64 d_eighth_0 n_48 w_3 t_128 w_1 n_51 w_1 t_126 w_1 t_124 n_53 w_2 t_123 n_51 w_1 t_121 w_242 
+ t_137 v_68 d_quarter_0 n_44 w_6 v_64 d_eighth_0 n_48 w_3 t_136 w_1 n_51 w_1 t_134 w_1 t_132 n_53 w_2 t_131 n_51 w_1 t_129 w_242 
+ t_145 v_68 d_quarter_0 n_44 w_6 v_64 d_eighth_0 n_48 w_3 t_144 w_1 n_51 w_1 t_142 w_1 t_140 n_53 w_2 t_139 n_51 w_1 t_137 w_242 
+ t_153 v_68 d_quarter_0 n_44 w_6 v_64 d_eighth_0 n_48 w_3 t_152 w_1 n_51 w_1 t_150 w_1 t_148 n_53 w_2 t_147 n_51 w_1 t_145 w_242 
+ t_160 v_68 d_quarter_0 n_44 w_6 v_64 d_eighth_0 n_48 w_4 n_51 w_1 t_158 w_1 t_156 n_53 w_2 t_155 n_51 w_1 t_153 w_242 
+ t_160 v_68 d_quarter_0 n_44 w_6 v_64 d_eighth_0 n_48 w_4 n_51 w_2 n_53 w_2 n_51 w_243 
+ t_129 v_68 d_quarter_0 n_45 w_6 v_64 d_eighth_0 n_49 w_3 t_128 w_1 n_52 w_1 t_126 w_1 t_124 n_54 w_2 t_123 n_52 w_1 t_121 w_242 
+ t_137 v_68 d_quarter_0 n_45 w_6 v_64 d_eighth_0 n_49 w_3 t_136 w_1 n_52 w_1 t_134 w_1 t_132 n_54 w_2 t_131 n_52 w_1 t_129 w_242 
+ t_145 v_68 d_quarter_0 n_45 w_6 v_64 d_eighth_0 n_49 w_3 t_144 w_1 n_52 w_1 t_142 w_1 t_140 n_54 w_2 t_139 n_52 w_1 t_137 w_242 
+ t_153 v_68 d_quarter_0 n_45 w_6 v_64 d_eighth_0 n_49 w_3 t_152 w_1 n_52 w_1 t_150 w_1 t_148 n_54 w_2 t_147 n_52 w_1 t_145 w_242 
+ t_160 v_68 d_quarter_0 n_45 w_6 v_64 d_eighth_0 n_49 w_4 n_52 w_1 t_158 w_1 t_156 n_54 w_2 t_155 n_52 w_1 t_153 w_242 
+ t_160 v_68 d_quarter_0 n_45 w_6 v_64 d_eighth_0 n_49 w_4 n_52 w_2 n_54 w_2 n_52 w_243 
+ t_129 v_68 d_quarter_0 n_46 w_6 v_64 d_eighth_0 n_50 w_3 t_128 w_1 n_53 w_1 t_126 w_1 t_124 n_55 w_2 t_123 n_53 w_1 t_121 w_242 
+ t_137 v_68 d_quarter_0 n_46 w_6 v_64 d_eighth_0 n_50 w_3 t_136 w_1 n_53 w_1 t_134 w_1 t_132 n_55 w_2 t_131 n_53 w_1 t_129 w_242 
+ t_145 v_68 d_quarter_0 n_46 w_6 v_64 d_eighth_0 n_50 w_3 t_144 w_1 n_53 w_1 t_142 w_1 t_140 n_55 w_2 t_139 n_53 w_1 t_137 w_242 
+ t_153 v_68 d_quarter_0 n_46 w_6 v_64 d_eighth_0 n_50 w_3 t_152 w_1 n_53 w_1 t_150 w_1 t_148 n_55 w_2 t_147 n_53 w_1 t_145 w_242 
+ t_160 v_68 d_quarter_0 n_46 w_6 v_64 d_eighth_0 n_50 w_4 n_53 w_1 t_158 w_1 t_156 n_55 w_2 t_155 n_53 w_1 t_153 w_242 
+ t_160 v_68 d_quarter_0 n_46 w_6 v_64 d_eighth_0 n_50 w_4 n_53 w_2 n_55 w_2 n_53 w_243 
+ t_129 v_68 d_quarter_0 n_47 w_6 v_64 d_eighth_0 n_51 w_3 t_128 w_1 n_54 w_1 t_126 w_1 t_124 n_56 w_2 t_123 n_54 w_1 t_121 w_242 
+ t_137 v_68 d_quarter_0 n_47 w_6 v_64 d_eighth_0 n_51 w_3 t_136 w_1 n_54 w_1 t_134 w_1 t_132 n_56 w_2 t_131 n_54 w_1 t_129 w_242 
+ t_145 v_68 d_quarter_0 n_47 w_6 v_64 d_eighth_0 n_51 w_3 t_144 w_1 n_54 w_1 t_142 w_1 t_140 n_56 w_2 t_139 n_54 w_1 t_137 w_242 
+ t_153 v_68 d_quarter_0 n_47 w_6 v_64 d_eighth_0 n_51 w_3 t_152 w_1 n_54 w_1 t_150 w_1 t_148 n_56 w_2 t_147 n_54 w_1 t_145 w_242 
+ t_160 v_68 d_quarter_0 n_47 w_6 v_64 d_eighth_0 n_51 w_4 n_54 w_1 t_158 w_1 t_156 n_56 w_2 t_155 n_54 w_1 t_153 w_242 
+ t_160 v_68 d_quarter_0 n_47 w_6 v_64 d_eighth_0 n_51 w_4 n_54 w_2 n_56 w_2 n_54 w_243 
+ t_129 v_68 d_quarter_0 n_48 w_6 v_64 d_eighth_0 n_52 w_3 t_128 w_1 n_55 w_1 t_126 w_1 t_124 n_57 w_2 t_123 n_55 w_1 t_121 w_242 
+ t_137 v_68 d_quarter_0 n_48 w_6 v_64 d_eighth_0 n_52 w_3 t_136 w_1 n_55 w_1 t_134 w_1 t_132 n_57 w_2 t_131 n_55 w_1 t_129 w_242 
+ t_145 v_68 d_quarter_0 n_48 w_6 v_64 d_eighth_0 n_52 w_3 t_144 w_1 n_55 w_1 t_142 w_1 t_140 n_57 w_2 t_139 n_55 w_1 t_137 w_242 
+ t_153 v_68 d_quarter_0 n_48 w_6 v_64 d_eighth_0 n_52 w_3 t_152 w_1 n_55 w_1 t_150 w_1 t_148 n_57 w_2 t_147 n_55 w_1 t_145 w_242 
+ t_160 v_68 d_quarter_0 n_48 w_6 v_64 d_eighth_0 n_52 w_4 n_55 w_1 t_158 w_1 t_156 n_57 w_2 t_155 n_55 w_1 t_153 w_242 
+ t_160 v_68 d_quarter_0 n_48 w_6 v_64 d_eighth_0 n_52 w_4 n_55 w_2 n_57 w_2 n_55 w_243 
+ t_129 v_68 d_quarter_0 n_49 w_6 v_64 d_eighth_0 n_53 w_3 t_128 w_1 n_56 w_1 t_126 w_1 t_124 n_58 w_2 t_123 n_56 w_1 t_121 w_242 
+ t_137 v_68 d_quarter_0 n_49 w_6 v_64 d_eighth_0 n_53 w_3 t_136 w_1 n_56 w_1 t_134 w_1 t_132 n_58 w_2 t_131 n_56 w_1 t_129 w_242 
+ t_145 v_68 d_quarter_0 n_49 w_6 v_64 d_eighth_0 n_53 w_3 t_144 w_1 n_56 w_1 t_142 w_1 t_140 n_58 w_2 t_139 n_56 w_1 t_137 w_242 
+ t_153 v_68 d_quarter_0 n_49 w_6 v_64 d_eighth_0 n_53 w_3 t_152 w_1 n_56 w_1 t_150 w_1 t_148 n_58 w_2 t_147 n_56 w_1 t_145 w_242 
+ t_160 v_68 d_quarter_0 n_49 w_6 v_64 d_eighth_0 n_53 w_4 n_56 w_1 t_158 w_1 t_156 n_58 w_2 t_155 n_56 w_1 t_153 w_242 
+ t_160 v_68 d_quarter_0 n_49 w_6 v_64 d_eighth_0 n_53 w_4 n_56 w_2 n_58 w_2 n_56 w_243 
+ t_129 v_68 d_quarter_0 n_50 w_6 v_64 d_eighth_0 n_54 w_3 t_128 w_1 n_57 w_1 t_126 w_1 t_124 n_59 w_2 t_123 n_57 w_1 t_121 w_242 
+ t_137 v_68 d_quarter_0 n_50 w_6 v_64 d_eighth_0 n_54 w_3 t_136 w_1 n_57 w_1 t_134 w_1 t_132 n_59 w_2 t_131 n_57 w_1 t_129 w_242 
+ t_145 v_68 d_quarter_0 n_50 w_6 v_64 d_eighth_0 n_54 w_3 t_144 w_1 n_57 w_1 t_142 w_1 t_140 n_59 w_2 t_139 n_57 w_1 t_137 w_242 
+ t_153 v_68 d_quarter_0 n_50 w_6 v_64 d_eighth_0 n_54 w_3 t_152 w_1 n_57 w_1 t_150 w_1 t_148 n_59 w_2 t_147 n_57 w_1 t_145 w_242 
+ t_160 v_68 d_quarter_0 n_50 w_6 v_64 d_eighth_0 n_54 w_4 n_57 w_1 t_158 w_1 t_156 n_59 w_2 t_155 n_57 w_1 t_153 w_242 
+ t_160 v_68 d_quarter_0 n_50 w_6 v_64 d_eighth_0 n_54 w_4 n_57 w_2 n_59 w_2 n_57 w_243 
+ t_129 v_68 d_quarter_0 n_51 w_6 v_64 d_eighth_0 n_55 w_3 t_128 w_1 n_58 w_1 t_126 w_1 t_124 n_60 w_2 t_123 n_58 w_1 t_121 w_242 
+ t_137 v_68 d_quarter_0 n_51 w_6 v_64 d_eighth_0 n_55 w_3 t_136 w_1 n_58 w_1 t_134 w_1 t_132 n_60 w_2 t_131 n_58 w_1 t_129 w_242 
+ t_145 v_68 d_quarter_0 n_51 w_6 v_64 d_eighth_0 n_55 w_3 t_144 w_1 n_58 w_1 t_142 w_1 t_140 n_60 w_2 t_139 n_58 w_1 t_137 w_242 
+ t_153 v_68 d_quarter_0 n_51 w_6 v_64 d_eighth_0 n_55 w_3 t_152 w_1 n_58 w_1 t_150 w_1 t_148 n_60 w_2 t_147 n_58 w_1 t_145 w_242 
+ t_160 v_68 d_quarter_0 n_51 w_6 v_64 d_eighth_0 n_55 w_4 n_58 w_1 t_158 w_1 t_156 n_60 w_2 t_155 n_58 w_1 t_153 w_242 
+ t_160 v_68 d_quarter_0 n_51 w_6 v_64 d_eighth_0 n_55 w_4 n_58 w_2 n_60 w_2 n_58 w_243 
+ t_129 v_68 d_quarter_0 n_52 w_6 v_64 d_eighth_0 n_56 w_3 t_128 w_1 n_59 w_1 t_126 w_1 t_124 n_61 w_2 t_123 n_59 w_1 t_121 w_242 
+ t_137 v_68 d_quarter_0 n_52 w_6 v_64 d_eighth_0 n_56 w_3 t_136 w_1 n_59 w_1 t_134 w_1 t_132 n_61 w_2 t_131 n_59 w_1 t_129 w_242 
+ t_145 v_68 d_quarter_0 n_52 w_6 v_64 d_eighth_0 n_56 w_3 t_144 w_1 n_59 w_1 t_142 w_1 t_140 n_61 w_2 t_139 n_59 w_1 t_137 w_242 
+ t_153 v_68 d_quarter_0 n_52 w_6 v_64 d_eighth_0 n_56 w_3 t_152 w_1 n_59 w_1 t_150 w_1 t_148 n_61 w_2 t_147 n_59 w_1 t_145 w_242 
+ t_160 v_68 d_quarter_0 n_52 w_6 v_64 d_eighth_0 n_56 w_4 n_59 w_1 t_158 w_1 t_156 n_61 w_2 t_155 n_59 w_1 t_153 w_242 
+ t_160 v_68 d_quarter_0 n_52 w_6 v_64 d_eighth_0 n_56 w_4 n_59 w_2 n_61 w_2 n_59 w_243 
